@@ -19,10 +19,10 @@ import androidx.core.content.ContextCompat
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_show_pic.*
+
 import kotlinx.android.synthetic.main.login.*
 import kotlinx.android.synthetic.main.user_registration.*
-import kotlinx.android.synthetic.main.user_registration.view.*
+
 import java.util.jar.Manifest
 
 class MainActivity : AppCompatActivity() {
