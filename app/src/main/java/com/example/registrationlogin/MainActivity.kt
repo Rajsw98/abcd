@@ -1,18 +1,15 @@
 package com.example.registrationlogin
 
-import android.app.ActionBar
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.ContentValues
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.View
-import android.widget.EditText
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -22,8 +19,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 import kotlinx.android.synthetic.main.login.*
 import kotlinx.android.synthetic.main.user_registration.*
-
-import java.util.jar.Manifest
 
 class MainActivity : AppCompatActivity() {
     lateinit var handeler:Database
@@ -73,7 +68,15 @@ class MainActivity : AppCompatActivity() {
 
         login_button.setOnClickListener{
             if (handeler.userPresent(loginemail.text.toString(), loginpassword.text.toString())) {
-                Toast.makeText(this, "login successfully", Toast.LENGTH_LONG).show()
+                val lname=loginemail.text.toString()
+                val lpassword=loginpassword.text.toString()
+
+                val intent = Intent(this@MainActivity, welcomeActivity::class.java)
+                    intent.putExtra("M", lname)
+                    intent.putExtra("P", lpassword)
+                    startActivity(intent)
+                    Toast.makeText(this, "login successfully", Toast.LENGTH_LONG).show()
+
             }
             else {
                 Toast.makeText(this, "Username or password is incorrect", Toast.LENGTH_LONG).show()
@@ -87,21 +90,20 @@ showLogin()
     }
 
     private fun inputData() {
-        uname=""+name.text.toString().trim()
-        upassword=""+password.text.toString().trim()
-        uemail=""+email.text.toString().trim()
+        uname=""+name.text.toString()
+        upassword=""+password.text.toString()
+        uemail=""+email.text.toString()
 
 
         showHome()
 
-        val timestamp=System.currentTimeMillis()
+
         val id=handeler.insertUserData(
-            name = ""+name.toString(),
+            name = ""+name.getText().toString(),
             image = ""+image_uri,
-            email = ""+email.toString(),
-            password = ""+password.toString(),
-            addedTime = ""+timestamp,
-           updatedTime = ""+timestamp
+            email = ""+email.getText().toString(),
+            password = ""+password.getText().toString()
+
 
 
         )
